@@ -149,7 +149,7 @@ My project includes the following files:
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network 
 * README.md has the project details and my report.
-
+* ride.mp4  a 2 full ride on the simulation track "sorry about the quality as I used the udacity provided virtual machine"
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
 ```sh
@@ -168,7 +168,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 My final model consisted of the following layers:
 
-[image1]: ./examples/model.png "Model Layers"
+<img src="./examples/model.png" width="820" height="248" />
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -201,6 +201,7 @@ To combat the overfitting, I modified the model so that I made a drop layes betw
 
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track specilly at the curves,So to improve the driving behavior in these cases, I trained more data and used the Augmentation.
 
+
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
@@ -209,7 +210,7 @@ The final model architecture (model.py lines 18-24) consisted of a compination o
 
 Here is a visualization of the architecture 
 
-[image1]: ./examples/model.png "Model Layers"
+<img src="./examples/model.png" width="820" height="248" />
 
 #### 3. Creation of the Training Set & Training Process
 
@@ -217,7 +218,11 @@ First I used the given data to test the behavior, I found that the car fell off 
 
 To capture good driving behavior, I first recorded 3 laps on track one using center lane driving clokwise.  
 
-[center Image]: ./examples/orignal_image.png "center Image "
+
+<img src="./examples/orignal_image.png" width="820" height="248" />
+
+
+<img src="./examples/threeimages.png" width="820" height="248" />
 
 I drive first in the center smoothly then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover and to return back to the ceter.
 
@@ -226,7 +231,7 @@ Then I repeated this process on  another 3 laps but this time It was counter clo
 
 To augment the data sat, I also flipped images and angles thinking that this would to generalize the model. For example, here is an image that has then been flipped:
 
-[FUll Image]: ./examples/images.png "Full Images "
+<img src="./examples/images.png" width="820" height="248" />
 
 
 After the collection process, I had 102200 number of data points. I then preprocessed this data by using generator as with that size and number, I couldn't fit that to the memory
