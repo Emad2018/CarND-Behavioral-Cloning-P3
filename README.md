@@ -29,13 +29,6 @@ All that said, please be concise!  We're not looking for you to write a book her
 
 You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
 
-The Project
----
-The goals / steps of this project are the following:
-* Use the simulator to collect data of good driving behavior 
-* Design, train and validate a model that predicts a steering angle from image data
-* Use the model to drive the vehicle autonomously around the first track in the simulator. The vehicle should remain on the road for an entire loop around the track.
-* Summarize the results with a written report
 
 ### Dependencies
 This lab requires:
@@ -122,4 +115,125 @@ Will run the video at 48 FPS. The default FPS is 60.
 
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+
+
+
+
+
+
+
+# **Behavioral Cloning** 
+
+
+**Behavioral Cloning Project**
+
+The goals / steps of this project are the following:
+* Use the simulator to collect data of good driving behavior
+* Build, a convolution neural network in Keras that predicts steering angles from images
+* Train and validate the model with a training and validation set
+* Test that the model successfully drives around track one without leaving the road
+* Summarize the results with a written report
+
+
+
+## Rubric Points
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
+
+---
+### Files Submitted & Code Quality
+
+#### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
+
+My project includes the following files:
+* model.py containing the script to create and train the model
+* drive.py for driving the car in autonomous mode
+* model.h5 containing a trained convolution neural network 
+* README.md has the project details and my report.
+
+#### 2. Submission includes functional code
+Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing 
+```sh
+python drive.py model.h5
+```
+
+you can download the Simulator using this [link]("https://github.com/udacity/self-driving-car-sim")
+
+#### 3. Submission code is usable and readable
+
+The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+
+### Model Architecture and Training Strategy
+
+#### 1. An appropriate model architecture has been employed
+
+My final model consisted of the following layers:
+
+[image1]: ./examples/model.png "Model Layers"
+
+#### 2. Attempts to reduce overfitting in the model
+
+The model contains dropout layers in order to reduce overfitting (model.py lines 98,101). 
+
+The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+
+#### 3. Model parameter tuning
+
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 108).
+
+#### 4. Appropriate training data
+
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road and I used augmentation  
+
+For details about how I created the training data, see the next section. 
+
+### Model Architecture and Training Strategy
+
+#### 1. Solution Design Approach
+
+The overall strategy for deriving a model architecture was to ...
+
+My first step was to use a convolution neural network model similar to the Lnet I thought this model might be appropriate because because It's a compination of conv layers and fully connected layers. 
+
+In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+
+To combat the overfitting, I modified the model so that I made a drop layes between the conv layers and usd sub sample to reduce the dimensionality.
+
+
+The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track specilly at the curves,So to improve the driving behavior in these cases, I trained more data and used the Augmentation.
+
+At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+
+#### 2. Final Model Architecture
+
+The final model architecture (model.py lines 18-24) consisted of a compination of convolution neural network with fully connected layers
+
+Here is a visualization of the architecture 
+
+[image1]: ./examples/model.png "Model Layers"
+
+#### 3. Creation of the Training Set & Training Process
+
+First I used the given data to test the behavior, I found that the car fell off the track specilly at the curves so I decided to train more.
+
+To capture good driving behavior, I first recorded 3 laps on track one using center lane driving clokwise.  
+
+[center Image]: ./examples/orignal_image.png "center Image "
+
+I drive first in the center smoothly then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to how to recover and to return back to the ceter.
+
+
+Then I repeated this process on  another 3 laps but this time It was counter clock wise..
+
+To augment the data sat, I also flipped images and angles thinking that this would to generalize the model. For example, here is an image that has then been flipped:
+
+[FUll Image]: ./examples/images.png "Full Images "
+
+
+After the collection process, I had 102200 number of data points. I then preprocessed this data by using generator as with that size and number, I couldn't fit that to the memory
+
+
+I finally randomly shuffled the data set and put 20% of the data into a validation set. 
+
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by testing as I used 10,8 and It was overfit.
+I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
